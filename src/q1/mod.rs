@@ -1,13 +1,9 @@
-use std::{collections::HashMap, fs::File, io::Read};
+use std::collections::HashMap;
+
+use crate::read_file;
 
 pub fn solve_p1() {
-    let mut input = String::new();
-    File::open("./src/q1/final.txt")
-        .expect("cannot read file")
-        .read_to_string(&mut input)
-        .expect("cannot store file contents into string");
-
-    println!("{input}");
+    let input = read_file("./src/q1/final.txt");
 
     let (mut left_col, mut right_col): (Vec<i32>, Vec<i32>) = input
         .lines()
@@ -25,11 +21,11 @@ pub fn solve_p1() {
 
     let sum: i32 = left_col
         .into_iter()
-        .zip(right_col.into_iter())
+        .zip(right_col)
         .map(|(left, right)| {
             let result = left - right;
             if result < 0 {
-                result * -1
+                -result
             } else {
                 result
             }
@@ -40,13 +36,7 @@ pub fn solve_p1() {
 }
 
 pub fn solve_p2() {
-    let mut input = String::new();
-    File::open("./src/q1/final.txt")
-        .expect("cannot read file")
-        .read_to_string(&mut input)
-        .expect("cannot store file contents into string");
-
-    println!("{input}");
+    let input = read_file("./src/q1/final.txt");
 
     let (left_col, right_col): (Vec<i32>, Vec<i32>) = input
         .lines()
