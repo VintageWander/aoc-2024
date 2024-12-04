@@ -14,7 +14,23 @@ pub fn read_file(path: &str) -> String {
     input
 }
 
+pub trait ConvertI32 {
+    fn to_i32(self) -> i32;
+}
+
+impl ConvertI32 for &str {
+    fn to_i32(self) -> i32 {
+        self.parse().expect("Cannot convert")
+    }
+}
+
+impl ConvertI32 for String {
+    fn to_i32(self) -> i32 {
+        self.parse().expect("Cannot convert")
+    }
+}
+
 fn main() {
     // q1::solve_p2();
-    q2::solve_p1();
+    q2::solve_p2();
 }

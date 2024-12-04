@@ -1,52 +1,31 @@
 use std::collections::HashMap;
 
-use crate::read_file;
+use crate::{read_file, ConvertI32};
 
 pub fn solve_p1() {
-    let input = read_file("./src/q1/final.txt");
-
-    let (mut left_col, mut right_col): (Vec<i32>, Vec<i32>) = input
+    let (mut left_col, mut right_col): (Vec<i32>, Vec<i32>) = read_file("./src/q1/final.txt")
         .lines()
         .map(|line| line.split_once("   ").expect("Cannot split"))
-        .map(|(left_str, right_str)| {
-            (
-                left_str.parse::<i32>().expect("Cannot convert to number"),
-                right_str.parse::<i32>().expect("Cannot convert to number"),
-            )
-        })
+        .map(|(left_str, right_str)| (left_str.to_i32(), right_str.to_i32()))
         .unzip();
 
     left_col.sort();
     right_col.sort();
 
-    let sum: i32 = left_col
+    let sum: u32 = left_col
         .into_iter()
         .zip(right_col)
-        .map(|(left, right)| {
-            let result = left - right;
-            if result < 0 {
-                -result
-            } else {
-                result
-            }
-        })
+        .map(|(left, right)| left.abs_diff(right))
         .sum();
 
     println!("{sum}")
 }
 
 pub fn solve_p2() {
-    let input = read_file("./src/q1/final.txt");
-
-    let (left_col, right_col): (Vec<i32>, Vec<i32>) = input
+    let (left_col, right_col): (Vec<i32>, Vec<i32>) = read_file("./src/q1/final.txt")
         .lines()
         .map(|line| line.split_once("   ").expect("Cannot split"))
-        .map(|(left_str, right_str)| {
-            (
-                left_str.parse::<i32>().expect("Cannot convert to number"),
-                right_str.parse::<i32>().expect("Cannot convert to number"),
-            )
-        })
+        .map(|(left_str, right_str)| (left_str.to_i32(), right_str.to_i32()))
         .unzip();
 
     // Hashmap to store number - occurence
