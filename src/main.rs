@@ -4,6 +4,7 @@ use std::{fs::File, io::Read};
 
 mod q1;
 mod q2;
+mod q3;
 
 pub fn read_file(path: &str) -> String {
     let mut input = String::new();
@@ -32,5 +33,6 @@ impl ConvertI32 for String {
 
 fn main() {
     // q1::solve_p2();
-    q2::solve_p2();
+    // q2::solve_p2();
+    q3::solve_p2();
 }
